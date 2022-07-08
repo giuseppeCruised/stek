@@ -1,4 +1,4 @@
-package com.company;
+package domain;
 
 // A Type is
 public enum Type {
