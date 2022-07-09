@@ -14,39 +14,13 @@ public class Interpreter {
     private HashMap<String, Method> Methods;
     VariableHandler variableHandler;
 
-    public void interpretProgram(String program, Item[] args) {
+    public void interpretProgram(HashMap<String, Method> Methods, Item[] args) {
         this.itemStack = new Stack<>();
         this.instructionStack = new Stack<>();
-        this.Methods = new HashMap<>();
+        this.Methods = Methods;
         this.variableHandler = new VariableHandler();
 
-        String[] identityVariables = new String[1];
-        identityVariables[0] = "b";
-        Instruction[] identityInstructions = new Instruction[1];
-        identityInstructions[0] = new Instruction("b",2);
-        Method identity = new Method(identityInstructions,identityVariables);
-        this.Methods.put("identity",identity);
-
-        Instruction[] newMethod = new Instruction[2];
-        newMethod[0] = new Instruction("a", 2);
-        newMethod[1] = new Instruction("print", 2);
-        String[] tmpVariables = new String[1];
-        tmpVariables[0] = "a";
-        Method method = new Method(newMethod, tmpVariables);
-
-        this.Methods.put("printTwice", method);
-
-        Instruction identityInstruction = new Instruction("identity",3);
-        Instruction printTwice = new Instruction("$printTwice", 1);
-        Instruction push3 = new Instruction("3", 1);
-
-        Instruction push4 = new Instruction("4", 1);
-        Instruction push5 = new Instruction("4", 1);
-        instructionStack.push(identityInstruction);
-        instructionStack.push(printTwice);
-        instructionStack.push(push3);
-        instructionStack.push(push4);
-        instructionStack.push(push5);
+        instructionStack.push(new Instruction("MAIN", 1));
 
         for (Item arg : args) {
             itemStack.push(arg);
@@ -72,20 +46,35 @@ public class Interpreter {
                 IntegerItem addedItem = new IntegerItem(
                         (Integer) firstItem.getValue() + (Integer) secondItem.getValue());
                 itemStack.push(addedItem);
+//            } else if (currentInstruction.getName().equals("if")) {
+//                BooleanItem predicate = (BooleanItem) itemStack.pop();
+//                MethodItem method = (MethodItem) itemStack.pop();
+//                if((Boolean) predicate.getValue()){
+//                    instructionStack.push(MethodItem.);
+//                }
+            } else if (currentInstruction.getName().equals("TRUE")) {
+                BooleanItem newItem = new BooleanItem(true);
+                itemStack.push(newItem);
+            } else if (currentInstruction.getName().equals("FALSE")) {
+                BooleanItem newItem = new BooleanItem(false);
+                itemStack.push(newItem);
             } else if (variableHandler.activeVariable(currentInstruction.getName())) {
                 Item variable = variableHandler.getVariable(currentInstruction.getName());
-                if (variable.getType() == Type.METHOD) {
-                    instructionStack.push(new Instruction((String) variable.getValue(), currentInstruction.getLine()));
+                itemStack.push(variableHandler.getVariable(currentInstruction.getName()));
+            } else if (currentInstruction.getName().equals("!")) {
+                Item item = itemStack.pop();
+                if(item.getType() == Type.METHOD){
+                    instructionStack.push(new Instruction((String) item.getValue(),currentInstruction.getLine()));
                 } else {
-                    itemStack.push(variableHandler.getVariable(currentInstruction.getName()));
+                    itemStack.push(item);
                 }
             } else if (currentInstruction.getName().equals("return")) {
                 variableHandler.returnVariables();
-            } else if (currentInstruction.getName().charAt(0) == '$') {
+            } else if (currentInstruction.getName().charAt(0) == '?') {
                 String methodName = currentInstruction.getName().substring(1);
                 if (Methods.containsKey(methodName)) {
                     itemStack.push(new MethodItem(methodName));
-                } else if(variableHandler.activeVariable(methodName)) {
+                } else if (variableHandler.activeVariable(methodName)) {
                     itemStack.push(variableHandler.getVariable(methodName));
                 }
             } else {
@@ -110,3 +99,30 @@ public class Interpreter {
         }
     }
 }
+//    String[] identityVariables = new String[1];
+//        identityVariables[0] = "b";
+//        Instruction[] identityInstructions = new Instruction[1];
+//        identityInstructions[0] = new Instruction("b",2);
+//        Method identity = new Method(identityInstructions,identityVariables);
+//        this.Methods.put("identity",identity);
+//
+//        Instruction[] newMethod = new Instruction[2];
+//        newMethod[0] = new Instruction("a", 2);
+//        newMethod[1] = new Instruction("print", 2);
+//        String[] tmpVariables = new String[1];
+//        tmpVariables[0] = "a";
+//        Method method = new Method(newMethod, tmpVariables);
+//
+//        this.Methods.put("printTwice", method);
+//
+//        Instruction identityInstruction = new Instruction("identity",3);
+//        Instruction printTwice = new Instruction("$printTwice", 1);
+//        Instruction push3 = new Instruction("3", 1);
+//
+//        Instruction push4 = new Instruction("4", 1);
+//        Instruction push5 = new Instruction("4", 1);
+//        instructionStack.push(identityInstruction);
+//        instructionStack.push(printTwice);
+//        instructionStack.push(push3);
+//        instructionStack.push(push4);
+//        instructionStack.push(push5);

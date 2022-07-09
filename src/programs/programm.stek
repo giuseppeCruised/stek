@@ -1,0 +1,2 @@
+MAIN: =>
+  3 4 print print

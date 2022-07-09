@@ -1,0 +1,18 @@
+MAIN: =>
+  3
+  ?PRINT
+  EV
+
+
+PRINT: x =>
+  x print
+
+ID: x =>
+  x
+
+EV: ?x =>
+  ?x !
+
+
+YEA: x =>
+  x
