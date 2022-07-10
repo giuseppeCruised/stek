@@ -1,2 +1,2 @@
-MAIN: =>
-  3 4 print print
+MAIN: a =>
+  a 10 == TRUE and not $PRINT if

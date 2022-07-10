@@ -16,6 +16,12 @@ public class Lexer {
         File file = new File(filePath);
         BufferedReader br = null;
         HashMap<String, Method> methods = new HashMap<>();
+        String line;
+        int lineNumber = 0;
+        boolean readingMethod = false;
+        String methodName = null;
+        String[] arguments = null;
+        ArrayList<Instruction> instructions = new ArrayList<>();
 
         try {
             br = new BufferedReader(new FileReader(file));
@@ -23,12 +29,7 @@ public class Lexer {
             System.out.println("Error: File was not found");
         }
         try {
-            String line;
-            int lineNumber = 0;
-            boolean readingMethod = false;
-            String methodName = null;
-            String[] arguments = null;
-            ArrayList<Instruction> instructions = new ArrayList<>();
+
             while ((line = br.readLine()) != null) {
                 line = line.replaceAll(" +", " ");
                 if (!readingMethod) {
@@ -61,7 +62,7 @@ public class Lexer {
                         System.out.println("  ");
                         instructions.clear();
                     } else {
-                        Pattern instPattern = Pattern.compile(" ([a-z,0-9,A-Z,?,!,+]+( |))*");
+                        Pattern instPattern = Pattern.compile(" ([a-z,0-9,A-Z,?,!,+,==,-]+( |))*");
                         Matcher instMatcher = instPattern.matcher(line);
                         if (instMatcher.matches()) {
                             String[] identifiers = line.substring(1).split("( )+");
@@ -76,6 +77,17 @@ public class Lexer {
             }
         } finally {
             br.close();
+            methods.put(methodName, new Method(instructions.toArray(Instruction[]::new), arguments));
+            System.out.println(methodName+":");
+            System.out.println("--Arguments:");
+            for(String arg:arguments){
+                System.out.println(arg);
+            }
+            System.out.println("--Instructions:");
+            for (Instruction in : instructions) {
+                System.out.println(in.getName());
+            }
+            System.out.println("  ");
         }
 
         return methods;

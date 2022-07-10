@@ -1,18 +1,10 @@
-MAIN: =>
-  3
-  ?PRINT
-  EV
+MAIN: a =>
+  0 REPEAT
 
+REPEAT: a =>
+  a print
+  a 1 + dup
+  COUNT == not ?REPEAT if
 
-PRINT: x =>
-  x print
-
-ID: x =>
-  x
-
-EV: ?x =>
-  ?x !
-
-
-YEA: x =>
-  x
+COUNT: =>
+  10

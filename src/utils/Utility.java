@@ -26,7 +26,7 @@ public class Utility {
     }
 
     public static void log(Instruction instruction){
-        if(true){
+        if(false){
             System.out.println("LOG: "+instruction.getName());
         }
     }
