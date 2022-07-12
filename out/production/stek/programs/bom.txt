@@ -1,0 +1,5 @@
+MAIN: =>
+  10 11 + 21 == ?SUCCESS if
+
+SUCCESS: =>
+  3 print

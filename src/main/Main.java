@@ -15,8 +15,8 @@ public class Main {
     public static void main(String[] args) {
         try {
             Interpreter interpreter = new Interpreter();
-            Item[] arguments = new Item[1];
-            arguments[0] = new IntegerItem(10);
+            Item[] arguments = new Item[0];
+//            arguments[0] = new IntegerItem(10);
             HashMap<String, Method> methods =
                     Lexer.lexMethods("C:/Users/AnwenderIN/Desktop/Projects/stek/src/programs/testProgramm.txt");
             System.out.println("-------------------------------------------------------------------------------");

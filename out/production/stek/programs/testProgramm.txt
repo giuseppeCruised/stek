@@ -1,4 +1,4 @@
-MAIN: a =>
+MAIN: =>
   0 REPEAT
 
 REPEAT: a =>

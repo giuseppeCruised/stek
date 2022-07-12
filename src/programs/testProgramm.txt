@@ -1,10 +1,14 @@
-MAIN: a =>
+MAIN: =>
   0 REPEAT
 
 REPEAT: a =>
   a print
   a 1 + dup
   COUNT == not ?REPEAT if
+
+
+
+
 
 COUNT: =>
   10
