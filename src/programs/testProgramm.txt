@@ -6,9 +6,5 @@ REPEAT: a =>
   a 1 + dup
   COUNT == not ?REPEAT if
 
-
-
-
-
 COUNT: =>
   10
