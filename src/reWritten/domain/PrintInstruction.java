@@ -20,7 +20,7 @@ public class PrintInstruction implements Instruction {
     }
 
     @Override
-    public void executeInstruction(Stack<Instruction> instructionStack, Stack<DataItem> dataStack) {
+    public void executeInstruction(InstructionStack instructionStack, DataStack dataStack) {
         //missing
     }
 

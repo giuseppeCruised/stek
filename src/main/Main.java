@@ -5,6 +5,7 @@ import domain.IntegerItem;
 import domain.Item;
 import domain.Method;
 import reWritten.domain.Instruction;
+import reWritten.domain.MethodInstruction;
 import reWritten.parsemarse.InstructionParser;
 import reWritten.parsemarse.SafeParsedElement;
 
@@ -31,6 +32,7 @@ public class Main {
 //            System.out.println("DUHS");
 //        }
         InstructionParser iP = new InstructionParser();
-        SafeParsedElement<Instruction> parsedElement = iP.runParser("12",1, new String[0]);
+        SafeParsedElement<Instruction> parsedElement = iP.runParser("12", 1, new String[0],
+                new String[0]);
     }
 }

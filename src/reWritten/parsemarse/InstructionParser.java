@@ -8,10 +8,11 @@ import reWritten.utils.Utils;
 import java.util.Optional;
 import java.util.regex.Matcher;
 
-public class InstructionParser{
+public class InstructionParser {
 
 
-    public SafeParsedElement<Instruction> runParser(String unparsed, Integer lineNumber, String[] variables) {
+    public SafeParsedElement<Instruction> runParser(String unparsed, Integer lineNumber, String[] variables,
+                                                    String[] methodNames) {
         assert !unparsed.equals("");
 
         SafeParsedElement<Instruction> parsed =
