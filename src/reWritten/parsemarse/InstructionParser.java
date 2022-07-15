@@ -2,6 +2,7 @@ package reWritten.parsemarse;
 
 import reWritten.domain.Instruction;
 import reWritten.domain.IntegerInstruction;
+import reWritten.domain.MethodInstruction;
 import reWritten.domain.PrintInstruction;
 import reWritten.utils.Utils;
 
@@ -11,8 +12,8 @@ import java.util.regex.Matcher;
 public class InstructionParser {
 
 
-    public SafeParsedElement<Instruction> runParser(String unparsed, Integer lineNumber, String[] variables,
-                                                    String[] methodNames) {
+    public static SafeParsedElement<Instruction> runParser(String unparsed, Integer lineNumber, String[] variables,
+                                                    MethodInstruction[] methods) {
         assert !unparsed.equals("");
 
         SafeParsedElement<Instruction> parsed =

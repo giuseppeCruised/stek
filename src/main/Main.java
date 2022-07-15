@@ -7,6 +7,7 @@ import domain.Method;
 import reWritten.domain.Instruction;
 import reWritten.domain.MethodInstruction;
 import reWritten.parsemarse.InstructionParser;
+import reWritten.parsemarse.MethodParser;
 import reWritten.parsemarse.SafeParsedElement;
 
 import java.io.IOException;
@@ -31,8 +32,13 @@ public class Main {
 //        } catch (IOException e) {
 //            System.out.println("DUHS");
 //        }
-        InstructionParser iP = new InstructionParser();
-        SafeParsedElement<Instruction> parsedElement = iP.runParser("12", 1, new String[0],
-                new String[0]);
+//        InstructionParser iP = new InstructionParser();
+//        SafeParsedElement<Instruction> parsedElement = iP.runParser("12", 1, new String[0],
+//                new String[0]);
+        String[] test = new String[2];
+        test[0] = "yeah: a b => ";
+        test[1] = "";
+
+        MethodParser.runParser(test, 0, null);
     }
 }

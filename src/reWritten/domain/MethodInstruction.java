@@ -9,6 +9,13 @@ public class MethodInstruction implements Instruction{
     private Instruction[] Instructions;
     private String name;
 
+    public MethodInstruction(int line, String[] variables, Instruction[] instructions, String name) {
+        this.line = line;
+        this.variables = variables;
+        Instructions = instructions;
+        this.name = name;
+    }
+
     @Override
     public int getLine() {
         return this.line;
