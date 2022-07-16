@@ -12,6 +12,10 @@ public class IntegerInstruction implements Instruction {
         this.line = line;
     }
 
+    public int getValue(){
+        return value;
+    }
+
     public static Pattern getPattern() {
         return Pattern.compile("[1-9]+");
     }

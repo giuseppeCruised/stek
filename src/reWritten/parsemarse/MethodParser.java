@@ -32,11 +32,12 @@ public class MethodParser {
 
         int lineNumber = startLine + 1;
         for (String line : Arrays.copyOfRange(unparsed, 1, unparsed.length)) {
-            String[] unparsedInstructions = line.substring(1).split(" ");
+            String[] unparsedInstructions = line.replaceAll(" +", " ").substring(1).split(" ");
             for (String unparsedInstruction : unparsedInstructions) {
                 SafeParsedElement<Instruction> parsedElement =
                         InstructionParser.runParser(unparsedInstruction, lineNumber, variableNames, methods);
-                
+                errorMessage = errorMessage + parsedElement.getErrorMessage();
+
             }
 
             lineNumber++;
