@@ -31,7 +31,7 @@ public class InstructionParser {
                     )
             );
         } else {
-            parsed.setErrorMessage("Unkown character: " + unparsed);
+            parsed.setErrorMessage("Unknown character: " + unparsed);
         }
         return parsed;
     }

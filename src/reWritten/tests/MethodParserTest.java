@@ -25,7 +25,7 @@ class MethodParserTest {
         MethodInstruction[] methods = null;
 
         //actions
-        SafeParsedElement<MethodInstruction> result = MethodParser.runParser(unparsed,0,methods);
+        SafeParsedElement<MethodInstruction> result = MethodParser.runParser(unparsed,0,methods,"MAIN");
 
         //assertions
         assert result.getErrorMessage().equals("");
@@ -53,8 +53,8 @@ class MethodParserTest {
         MethodInstruction[] methods = null;
 
         //actions
-        SafeParsedElement<MethodInstruction> result = MethodParser.runParser(unparsed,0,methods);
-        assertEquals(result.getErrorMessage(),"Illegal character in method name: MA$$IN\n");
+        SafeParsedElement<MethodInstruction> result = MethodParser.runParser(unparsed,0,methods,null);
+        assertEquals(result.getErrorMessage(),"Illegal character in method name: MA$$IN in Line: 0\n");
 
     }
 
@@ -68,9 +68,14 @@ class MethodParserTest {
         MethodInstruction[] methods = null;
 
         //actions
-        SafeParsedElement<MethodInstruction> result = MethodParser.runParser(unparsed,0,methods);
-        assertEquals(result.getErrorMessage(),"Illegal character in variable name: $\n");
+        SafeParsedElement<MethodInstruction> result = MethodParser.runParser(unparsed,0,methods,"MAIN");
+        assertEquals(result.getErrorMessage(),"Illegal character in variable name: $ in Line: 0\n");
 
     }
 
+    @Test
+    void areVariableNamesCorrect(){
+        assert MethodParser.areVariableNamesCorrect(new String[] {"a", "b"},"",0);
+        assert !MethodParser.areVariableNamesCorrect(new String[] {"$"},"",0);
+    }
 }

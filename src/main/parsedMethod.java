@@ -1,6 +1,7 @@
 package main;
 
 import domain.Method;
+import reWritten.utils.Pair;
 
 import java.util.Optional;
 

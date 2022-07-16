@@ -11,21 +11,12 @@ import java.util.regex.Pattern;
 
 public class MethodParser {
     public static SafeParsedElement<MethodInstruction> runParser(String[] unparsed, int startLine,
-                                                                 MethodInstruction[] methods) {
+                                                                 MethodInstruction[] methods, String methodName) {
         boolean parsedSuccessfully = true;
 
         assert unparsed.length > 1;
 
         String errorMessage = "";
-
-        String methodName = unparsed[0].split(":")[0];
-
-        Pattern namePattern = Pattern.compile("[a-z,A-Z,0-9]+");
-
-        if (!namePattern.matcher(methodName).matches()) {
-            errorMessage = errorMessage + "Illegal character in method name: " + methodName + "\n";
-            parsedSuccessfully = false;
-        }
 
         String[] variableNames = unparsed[0].split(":")[1].split("=>")[0].substring(1).split(" ");
         parsedSuccessfully &= areVariableNamesCorrect(variableNames, errorMessage, startLine);
@@ -41,6 +32,9 @@ public class MethodParser {
                     instructions.add(x);
                     return Optional.of(x);
                 });
+                if(parsedElement.getParsedElementOptional().isEmpty()){
+                    parsedSuccessfully = false;
+                }
                 errorMessage = errorMessage + parsedElement.getErrorMessage();
             }
             lineNumber++;
@@ -56,13 +50,13 @@ public class MethodParser {
         }
     }
 
-    private static boolean areVariableNamesCorrect(String[] variableNames, String currentErrorMessage, int startLine) {
+    public static boolean areVariableNamesCorrect(String[] variableNames, String currentErrorMessage, int startLine) {
         boolean flag = true;
 
         for (String variableName : variableNames) {
             if (!Pattern.compile("[a-z,A-Z,0-9]").matcher(variableName).matches()) {
                 currentErrorMessage =
-                        currentErrorMessage + "Illegal character in variable name: " + variableName + "\n";
+                        currentErrorMessage + "Illegal character in variable name: " + variableName + " in Line: "+startLine+"\n";
                 flag = false;
             }
         }

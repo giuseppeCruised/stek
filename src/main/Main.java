@@ -39,6 +39,6 @@ public class Main {
         test[0] = "yeah: a b => ";
         test[1] = "";
 
-        MethodParser.runParser(test, 0, null);
+        MethodParser.runParser(test, 0, null,"yeah");
     }
 }

@@ -1,4 +1,4 @@
-package main;
+package reWritten.utils;
 
 public class Pair<X, Y> {
     private X fst;
