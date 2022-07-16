@@ -7,10 +7,10 @@ import java.util.Optional;
 
 public class SafeParsedElement<X> {
     private String errorMessage;
-    private Optional<Instruction> parsedElementOptional;
+    private Optional<X> parsedElementOptional;
 
     public SafeParsedElement(String errorMessage,
-                             Optional<Instruction> parsedElementOptional) {
+                             Optional<X> parsedElementOptional) {
         this.errorMessage = errorMessage;
         this.parsedElementOptional = parsedElementOptional;
     }
@@ -23,11 +23,11 @@ public class SafeParsedElement<X> {
         this.errorMessage = errorMessage;
     }
 
-    public Optional<Instruction> getParsedElementOptional() {
+    public Optional<X> getParsedElementOptional() {
         return parsedElementOptional;
     }
 
-    public void setParsedElementOptional(Optional<Instruction> parsedElementOptional) {
+    public void setParsedElementOptional(Optional<X> parsedElementOptional) {
         this.parsedElementOptional = parsedElementOptional;
     }
 }

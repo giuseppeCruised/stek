@@ -5,6 +5,7 @@ import reWritten.domain.MethodInstruction;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,7 +17,6 @@ public class MethodParser {
         assert unparsed.length > 1;
 
         String errorMessage = "";
-
 
         String methodName = unparsed[0].split(":")[0];
 
@@ -30,29 +30,30 @@ public class MethodParser {
         String[] variableNames = unparsed[0].split(":")[1].split("=>")[0].substring(1).split(" ");
         parsedSuccessfully &= areVariableNamesCorrect(variableNames, errorMessage, startLine);
 
+        ArrayList<Instruction> instructions = new ArrayList<>();
         int lineNumber = startLine + 1;
         for (String line : Arrays.copyOfRange(unparsed, 1, unparsed.length)) {
             String[] unparsedInstructions = line.replaceAll(" +", " ").substring(1).split(" ");
             for (String unparsedInstruction : unparsedInstructions) {
                 SafeParsedElement<Instruction> parsedElement =
                         InstructionParser.runParser(unparsedInstruction, lineNumber, variableNames, methods);
+                parsedElement.getParsedElementOptional().flatMap(x -> {
+                    instructions.add(x);
+                    return Optional.of(x);
+                });
                 errorMessage = errorMessage + parsedElement.getErrorMessage();
-
             }
-
             lineNumber++;
         }
-
-//        Pattern methodPattern = Pattern.compile("[a-z,0-9,A-Z]+: ([a-z,0-9,A-Z,?]+( |))*=>[a-z,A-z, ,0-9]*");
-//        Matcher methodMatcher = methodPattern.matcher(unparsed[0]);
-//        if (methodMatcher.matches()) {
-//
-//        } else {
-//            errorMessage = ""
-//        }
-
-
-        return null;
+        if (parsedSuccessfully) {
+            return new SafeParsedElement<MethodInstruction>(errorMessage,
+                    Optional.of(
+                            new MethodInstruction(lineNumber, variableNames, instructions.toArray(Instruction[]::new),
+                                    methodName)
+                    ));
+        } else {
+            return new SafeParsedElement<MethodInstruction>(errorMessage,Optional.empty());
+        }
     }
 
     private static boolean areVariableNamesCorrect(String[] variableNames, String currentErrorMessage, int startLine) {

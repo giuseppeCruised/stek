@@ -20,7 +20,7 @@ class InstructionParserTest {
         SafeParsedElement<Instruction> result = InstructionParser.runParser(unparsed, LINENUMBER, variables, methods);
         assert (result.getParsedElementOptional().isPresent());
         result.getParsedElementOptional().flatMap(x -> {
-            assert(x instanceof PrintInstruction);
+            assert x instanceof PrintInstruction;
             return Optional.of(x);
         });
     }

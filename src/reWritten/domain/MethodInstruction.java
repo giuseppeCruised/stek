@@ -16,6 +16,18 @@ public class MethodInstruction implements Instruction{
         this.name = name;
     }
 
+    public String[] getVariables() {
+        return variables;
+    }
+
+    public Instruction[] getInstructions() {
+        return Instructions;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     @Override
     public int getLine() {
         return this.line;
