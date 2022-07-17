@@ -2,11 +2,11 @@ package reWritten.parsemarse;
 
 import reWritten.domain.Instruction;
 import reWritten.domain.MethodInstruction;
+import reWritten.utils.Pair;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Optional;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class MethodParser {
@@ -19,7 +19,9 @@ public class MethodParser {
         String errorMessage = "";
 
         String[] variableNames = unparsed[0].split(":")[1].split("=>")[0].substring(1).split(" ");
-        parsedSuccessfully &= areVariableNamesCorrect(variableNames, errorMessage, startLine);
+        Pair<Boolean,String> correctVariableNames = areVariableNamesCorrect(variableNames, errorMessage, startLine);
+        parsedSuccessfully = correctVariableNames.getFst();
+        errorMessage += correctVariableNames.getSnd();
 
         ArrayList<Instruction> instructions = new ArrayList<>();
         int lineNumber = startLine + 1;
@@ -50,7 +52,7 @@ public class MethodParser {
         }
     }
 
-    public static boolean areVariableNamesCorrect(String[] variableNames, String currentErrorMessage, int startLine) {
+    public static Pair<Boolean,String> areVariableNamesCorrect(String[] variableNames, String currentErrorMessage, int startLine) {
         boolean flag = true;
 
         for (String variableName : variableNames) {
@@ -61,6 +63,6 @@ public class MethodParser {
             }
         }
 
-        return flag;
+        return new Pair<>(flag,currentErrorMessage);
     }
 }

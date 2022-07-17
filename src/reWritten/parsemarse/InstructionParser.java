@@ -31,7 +31,7 @@ public class InstructionParser {
                     )
             );
         } else {
-            parsed.setErrorMessage("Unknown character: " + unparsed);
+            parsed.setErrorMessage("Unknown instruction identifier: " + unparsed+" in line: "+lineNumber+"\n");
         }
         return parsed;
     }

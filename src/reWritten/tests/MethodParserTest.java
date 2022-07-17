@@ -75,7 +75,7 @@ class MethodParserTest {
 
     @Test
     void areVariableNamesCorrect(){
-        assert MethodParser.areVariableNamesCorrect(new String[] {"a", "b"},"",0);
-        assert !MethodParser.areVariableNamesCorrect(new String[] {"$"},"",0);
+        assert MethodParser.areVariableNamesCorrect(new String[] {"a", "b"},"",0).getFst();
+        assert !MethodParser.areVariableNamesCorrect(new String[] {"$"},"",0).getFst();
     }
 }

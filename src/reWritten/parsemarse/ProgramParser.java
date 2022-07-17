@@ -6,24 +6,47 @@ import reWritten.utils.Pair;
 import reWritten.domain.Program;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class ProgramParser {
     public static Program parseProgram(File file) throws IOException {
-        ArrayList<UnparsedMethod> unparsedMethods = splitProgramIntoUnparsedMethods(file);
+        Pair<ArrayList<UnparsedMethod>, String> split = splitProgramIntoUnparsedMethods(file);
+        ArrayList<UnparsedMethod> unparsedMethods = split.getFst();
+        String errorMessage = split.getSnd();
+
+        MethodInstruction[] initializedMethods = unparsedMethods.stream()
+                .map(unparsedMethod -> new MethodInstruction(unparsedMethod.getStartLine(), null, null,
+                        unparsedMethod.getMethodName()))
+                .toArray(MethodInstruction[]::new);
+
         SafeParsedElement<MethodInstruction>[] parsedMethods =
-                unparsedMethods.stream().map(unparsedMethod -> MethodParser
-                        .runParser(unparsedMethod.getUnparsedLines(), unparsedMethod.getStartLine(), null,
-                                unparsedMethod.getMethodName()))
+                unparsedMethods.stream().map(unparsedMethod ->
+                        MethodParser.runParser(unparsedMethod.getUnparsedLines(), unparsedMethod.getStartLine(),
+                                initializedMethods, unparsedMethod.getMethodName()))
                         .toArray(SafeParsedElement[]::new);
 
+        ArrayList<MethodInstruction> fullyParsedMethods = new ArrayList<>();
+        if (Arrays.stream(parsedMethods).allMatch(parsedMethod -> parsedMethod.getErrorMessage().equals(""))) {
+            for (MethodInstruction initializedMethod : initializedMethods) {
+                for (SafeParsedElement<MethodInstruction> parsedMethod : parsedMethods) {
+                    if (initializedMethod.getName()
+                            .equals(parsedMethod.getParsedElementOptional()
+                                    .orElse(new MethodInstruction(0, null, null, "")).getName())) {
+                        initializedMethod = parsedMethod.getParsedElementOptional().orElse(null);
+                        fullyParsedMethods.add(initializedMethod);
+                    }
+                }
+            }
+        } else {
+            for (SafeParsedElement<MethodInstruction> parsed : parsedMethods) {
+                errorMessage += parsed.getErrorMessage();
+            }
+        }
 
-        return null;
+        return new Program(fullyParsedMethods.toArray(MethodInstruction[]::new),errorMessage);
     }
 
-    public static ArrayList<UnparsedMethod> splitProgramIntoUnparsedMethods(File file)
+    public static Pair<ArrayList<UnparsedMethod>, String> splitProgramIntoUnparsedMethods(File file)
             throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(file));
         String errorMessage = "";
@@ -58,7 +81,8 @@ public class ProgramParser {
                             startLineNumber = lineNumber;
 
                         } else {
-                            errorMessage += "Illegal Character in MethodName: " + methodName + "in Line: " + lineNumber;
+                            errorMessage +=
+                                    "Illegal Character in MethodName: " + methodName + " in Line: " + lineNumber + "\n";
 
                         }
                     }
@@ -74,7 +98,7 @@ public class ProgramParser {
         }
 
 
-        return unparsedMethods;
+        return new Pair<>(unparsedMethods, errorMessage);
 
     }
 }
