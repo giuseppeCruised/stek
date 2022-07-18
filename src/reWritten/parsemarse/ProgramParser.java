@@ -32,7 +32,10 @@ public class ProgramParser {
                     if (initializedMethod.getName()
                             .equals(parsedMethod.getParsedElementOptional()
                                     .orElse(new MethodInstruction(0, null, null, "")).getName())) {
-                        initializedMethod = parsedMethod.getParsedElementOptional().orElse(null);
+                        MethodInstruction tmpMethod = parsedMethod.getParsedElementOptional().orElse(null);
+                        initializedMethod.setInstructions(tmpMethod.getInstructions());
+                        initializedMethod.setLine(tmpMethod.getLine());
+                        initializedMethod.setVariables(tmpMethod.getVariables());
                         fullyParsedMethods.add(initializedMethod);
                     }
                 }

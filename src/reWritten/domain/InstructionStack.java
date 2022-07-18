@@ -9,6 +9,10 @@ public class InstructionStack {
         this.instructionStack = new Stack<>();
     }
 
+    public boolean isEmpty(){
+        return this.instructionStack.isEmpty();
+    }
+
     public Instruction popInstruction(){
         return this.instructionStack.pop();
     }

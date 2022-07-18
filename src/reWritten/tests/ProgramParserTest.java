@@ -6,6 +6,7 @@ import reWritten.domain.Program;
 import reWritten.parsemarse.ProgramParser;
 
 import java.io.*;
+import java.util.Locale;
 
 class ProgramParserTest {
 
@@ -18,10 +19,10 @@ class ProgramParserTest {
         FileWriter fW = new FileWriter(testProgram);
 
         fW.write("MAIN: a => \n" +
-                " 3 MAIN \n" +
+                " 3 YEAH MAIN \n" +
                 " \n" +
                 "YEAH: q => \n" +
-                " 3 print \n" +
+                " 3 print MAIN \n" +
                 " \n");
         fW.close();
 

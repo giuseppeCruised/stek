@@ -28,6 +28,18 @@ public class MethodInstruction implements Instruction{
         return name;
     }
 
+    public void setLine(int line) {
+        this.line = line;
+    }
+
+    public void setVariables(String[] variables) {
+        this.variables = variables;
+    }
+
+    public void setInstructions(Instruction[] instructions) {
+        Instructions = instructions;
+    }
+
     @Override
     public int getLine() {
         return this.line;
