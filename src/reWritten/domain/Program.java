@@ -1,5 +1,7 @@
 package reWritten.domain;
 
+import reWritten.domain.instructions.MethodInstruction;
+
 public class Program {
     private MethodInstruction[] methods;
 

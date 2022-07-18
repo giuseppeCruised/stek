@@ -1,5 +1,7 @@
 package reWritten.domain;
 
+import reWritten.domain.instructions.Instruction;
+
 import java.util.Stack;
 
 public class InstructionStack {

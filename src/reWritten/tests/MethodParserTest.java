@@ -1,14 +1,12 @@
 package reWritten.tests;
 
-import domain.Method;
 import org.junit.jupiter.api.Test;
-import reWritten.domain.IntegerInstruction;
-import reWritten.domain.MethodInstruction;
-import reWritten.domain.PrintInstruction;
+import reWritten.domain.instructions.IntegerInstruction;
+import reWritten.domain.instructions.MethodInstruction;
+import reWritten.domain.instructions.PrintInstruction;
 import reWritten.parsemarse.MethodParser;
 import reWritten.parsemarse.SafeParsedElement;
 
-import java.util.Arrays;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,15 +1,12 @@
 package reWritten.parsemarse;
 
-import reWritten.domain.Instruction;
-import reWritten.domain.IntegerInstruction;
-import reWritten.domain.MethodInstruction;
-import reWritten.domain.PrintInstruction;
-import reWritten.utils.Utils;
+import reWritten.domain.instructions.Instruction;
+import reWritten.domain.instructions.IntegerInstruction;
+import reWritten.domain.instructions.MethodInstruction;
+import reWritten.domain.instructions.PrintInstruction;
 
 import java.util.Arrays;
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.stream.Collectors;
 
 public class InstructionParser {
 

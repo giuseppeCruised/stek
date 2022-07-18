@@ -1,6 +1,6 @@
 package reWritten.parsemarse;
 
-import reWritten.domain.MethodInstruction;
+import reWritten.domain.instructions.MethodInstruction;
 import reWritten.domain.UnparsedMethod;
 import reWritten.utils.Pair;
 import reWritten.domain.Program;

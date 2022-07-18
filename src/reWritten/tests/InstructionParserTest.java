@@ -1,12 +1,13 @@
 package reWritten.tests;
 
-import reWritten.domain.*;
+import reWritten.domain.instructions.Instruction;
+import reWritten.domain.instructions.IntegerInstruction;
+import reWritten.domain.instructions.MethodInstruction;
+import reWritten.domain.instructions.PrintInstruction;
 import reWritten.parsemarse.InstructionParser;
 import reWritten.parsemarse.SafeParsedElement;
 
 import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class InstructionParserTest {
     private final int LINENUMBER = 0;

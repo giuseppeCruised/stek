@@ -1,8 +1,6 @@
 package reWritten.parsemarse;
 
 
-import reWritten.domain.Instruction;
-
 import java.util.Optional;
 
 public class SafeParsedElement<X> {

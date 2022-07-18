@@ -1,19 +1,6 @@
 package main;
 
-import domain.BooleanItem;
-import domain.IntegerItem;
-import domain.Item;
-import domain.Method;
-import reWritten.domain.Instruction;
-import reWritten.domain.MethodInstruction;
-import reWritten.parsemarse.InstructionParser;
 import reWritten.parsemarse.MethodParser;
-import reWritten.parsemarse.SafeParsedElement;
-
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Main {
 

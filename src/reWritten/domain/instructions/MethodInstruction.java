@@ -1,18 +1,20 @@
-package reWritten.domain;
+package reWritten.domain.instructions;
 
-import java.util.Stack;
+import reWritten.domain.DataStack;
+import reWritten.domain.InstructionStack;
+import reWritten.utils.Utils;
 
-public class MethodInstruction implements Instruction{
+public class MethodInstruction implements Instruction {
 
     private int line;
     private String[] variables;
-    private Instruction[] Instructions;
+    private Instruction[] instructions;
     private String name;
 
     public MethodInstruction(int line, String[] variables, Instruction[] instructions, String name) {
         this.line = line;
         this.variables = variables;
-        Instructions = instructions;
+        this.instructions = instructions;
         this.name = name;
     }
 
@@ -21,7 +23,7 @@ public class MethodInstruction implements Instruction{
     }
 
     public Instruction[] getInstructions() {
-        return Instructions;
+        return instructions;
     }
 
     public String getName() {
@@ -37,7 +39,7 @@ public class MethodInstruction implements Instruction{
     }
 
     public void setInstructions(Instruction[] instructions) {
-        Instructions = instructions;
+        this.instructions = instructions;
     }
 
     @Override
@@ -46,7 +48,10 @@ public class MethodInstruction implements Instruction{
     }
 
     @Override
-    public void executeInstruction(InstructionStack instructionStack, DataStack dataStack) {
-
+    public boolean executeInstruction(InstructionStack instructionStack, DataStack dataStack) {
+        for(Instruction instruction: Utils.reverseInstructions(this.instructions)){
+            instructionStack.pushInstruction(instruction);
+        }
+        return true;
     }
 }

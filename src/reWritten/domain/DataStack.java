@@ -1,5 +1,7 @@
 package reWritten.domain;
 
+import reWritten.domain.items.DataItem;
+
 import java.util.Stack;
 
 public class DataStack {
@@ -16,4 +18,6 @@ public class DataStack {
     public void pushItem(DataItem item){
         this.dataStack.push(item);
     }
+
+    public boolean isEmpty(){ return dataStack.isEmpty(); }
 }

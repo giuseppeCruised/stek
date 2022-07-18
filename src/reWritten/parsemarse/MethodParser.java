@@ -1,7 +1,7 @@
 package reWritten.parsemarse;
 
-import reWritten.domain.Instruction;
-import reWritten.domain.MethodInstruction;
+import reWritten.domain.instructions.Instruction;
+import reWritten.domain.instructions.MethodInstruction;
 import reWritten.utils.Pair;
 
 import java.util.ArrayList;

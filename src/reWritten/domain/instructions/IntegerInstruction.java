@@ -1,6 +1,10 @@
-package reWritten.domain;
+package reWritten.domain.instructions;
 
-import java.util.Stack;
+import reWritten.domain.items.DataItem;
+import reWritten.domain.DataStack;
+import reWritten.domain.InstructionStack;
+import reWritten.domain.items.IntegerItem;
+
 import java.util.regex.Pattern;
 
 public class IntegerInstruction implements Instruction {
@@ -26,7 +30,8 @@ public class IntegerInstruction implements Instruction {
     }
 
     @Override
-    public void executeInstruction(InstructionStack instructionStack, DataStack dataStack) {
-        //missing
+    public boolean executeInstruction(InstructionStack instructionStack, DataStack dataStack) {
+        dataStack.pushItem(new IntegerItem(this.value));
+        return true;
     }
 }
