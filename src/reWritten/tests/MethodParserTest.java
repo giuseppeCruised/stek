@@ -7,6 +7,7 @@ import reWritten.domain.instructions.PrintInstruction;
 import reWritten.parsemarse.MethodParser;
 import reWritten.parsemarse.SafeParsedElement;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,6 +22,8 @@ class MethodParserTest {
         unparsed[1] = "  3 print";
 
         MethodInstruction[] methods = null;
+
+        ArrayList<String> s = new ArrayList<>();
 
         //actions
         SafeParsedElement<MethodInstruction> result = MethodParser.runParser(unparsed,0,methods,"MAIN");
