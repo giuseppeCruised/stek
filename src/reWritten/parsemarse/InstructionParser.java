@@ -1,9 +1,6 @@
 package reWritten.parsemarse;
 
-import reWritten.domain.instructions.Instruction;
-import reWritten.domain.instructions.IntegerInstruction;
-import reWritten.domain.instructions.MethodInstruction;
-import reWritten.domain.instructions.PrintInstruction;
+import reWritten.domain.instructions.*;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -33,6 +30,12 @@ public class InstructionParser {
             MethodInstruction method =
                     Arrays.stream(methods).filter(m -> m.getName().equals(unparsed)).findFirst().orElse(null);
             parsed.setParsedElementOptional(Optional.of(method));
+        } else if (BooleanInstruction.getPattern().matcher(unparsed).matches()) {
+            parsed.setParsedElementOptional(
+                    Optional.of(
+                            new BooleanInstruction(lineNumber, Boolean.parseBoolean(unparsed))
+                            )
+            );
         } else {
             parsed.setErrorMessage("Unknown instruction identifier: " + unparsed + " in line: " + lineNumber + "\n");
         }
