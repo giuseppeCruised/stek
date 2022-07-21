@@ -12,30 +12,31 @@ public class ProgramParser {
     public static Program parseProgram(File file) throws IOException {
         Pair<ArrayList<UnparsedMethod>, String> split = splitProgramIntoUnparsedMethods(file);
         ArrayList<UnparsedMethod> unparsedMethods = split.getFst();
+
         String errorMessage = split.getSnd();
 
         MethodInstruction[] initializedMethods = unparsedMethods.stream()
                 .map(unparsedMethod -> new MethodInstruction(unparsedMethod.getStartLine(), null, null,
-                        unparsedMethod.getMethodName()))
-                .toArray(MethodInstruction[]::new);
+                        unparsedMethod.getMethodName())).toArray(MethodInstruction[]::new);
 
-        SafeParsedElement<MethodInstruction>[] parsedMethods =
-                unparsedMethods.stream().map(unparsedMethod ->
-                        MethodParser.runParser(unparsedMethod.getUnparsedLines(), unparsedMethod.getStartLine(),
-                                initializedMethods, unparsedMethod.getMethodName()))
-                        .toArray(SafeParsedElement[]::new);
+        SafeParsedElement<MethodInstruction>[] parsedMethods = unparsedMethods.stream()
+                .map(unparsedMethod -> MethodParser.runParser(unparsedMethod.getUnparsedLines(),
+                        unparsedMethod.getStartLine(), initializedMethods, unparsedMethod.getMethodName()))
+                .toArray(SafeParsedElement[]::new);
 
         ArrayList<MethodInstruction> fullyParsedMethods = new ArrayList<>();
+
         if (Arrays.stream(parsedMethods).allMatch(parsedMethod -> parsedMethod.getErrorMessage().equals(""))) {
             for (MethodInstruction initializedMethod : initializedMethods) {
                 for (SafeParsedElement<MethodInstruction> parsedMethod : parsedMethods) {
-                    if (initializedMethod.getName()
-                            .equals(parsedMethod.getParsedElementOptional()
-                                    .orElse(new MethodInstruction(0, null, null, "")).getName())) {
+                    if (initializedMethod.getName().equals(parsedMethod.getParsedElementOptional()
+                            .orElse(new MethodInstruction(0, null, null, "")).getName())) {
                         MethodInstruction tmpMethod = parsedMethod.getParsedElementOptional().orElse(null);
+
                         initializedMethod.setInstructions(tmpMethod.getInstructions());
                         initializedMethod.setLine(tmpMethod.getLine());
                         initializedMethod.setVariables(tmpMethod.getVariables());
+
                         fullyParsedMethods.add(initializedMethod);
                     }
                 }
@@ -46,22 +47,28 @@ public class ProgramParser {
             }
         }
 
-        return new Program(fullyParsedMethods.toArray(MethodInstruction[]::new),errorMessage);
+        return new Program(fullyParsedMethods.toArray(MethodInstruction[]::new), errorMessage);
     }
 
     public static Pair<ArrayList<UnparsedMethod>, String> splitProgramIntoUnparsedMethods(File file)
             throws IOException {
+        boolean readingMethod = false;
+
+        int lineNumber = 0;
+        int startLineNumber = 0;
+
         BufferedReader br = new BufferedReader(new FileReader(file));
+
         String errorMessage = "";
         String line = "";
-        int lineNumber = 0;
 
-        int startLineNumber = 0;
         ArrayList<UnparsedMethod> unparsedMethods = new ArrayList<>();
         ArrayList<String> unparsedMethodContent = new ArrayList<>();
-        boolean readingMethod = false;
+
         String methodName = "";
+
         UnparsedMethod unparsedMethod = null;
+
         try {
             while ((line = br.readLine()) != null) {
                 if (readingMethod) {
@@ -86,7 +93,6 @@ public class ProgramParser {
                         } else {
                             errorMessage +=
                                     "Illegal Character in MethodName: " + methodName + " in Line: " + lineNumber + "\n";
-
                         }
                     }
 
@@ -99,7 +105,6 @@ public class ProgramParser {
         } finally {
             br.close();
         }
-
 
         return new Pair<>(unparsedMethods, errorMessage);
 
