@@ -1,6 +1,8 @@
 package reWritten.domain.items;
 
-public class BooleanItem implements DataItem{
+import reWritten.utils.Log;
+
+public class BooleanItem implements DataItem,PrintableItem{
     private Boolean value;
 
     public BooleanItem(Boolean value){
@@ -16,5 +18,10 @@ public class BooleanItem implements DataItem{
     public void setValue(Object newValue) {
         assert newValue instanceof Boolean;
         this.value = (Boolean) newValue;
+    }
+
+    @Override
+    public void printItem() {
+        Log.log(value.toString());
     }
 }
