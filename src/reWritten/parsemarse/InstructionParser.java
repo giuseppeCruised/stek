@@ -36,13 +36,18 @@ public class InstructionParser {
                             new BooleanInstruction(lineNumber, Boolean.parseBoolean(unparsed))
                             )
             );
+        } else if (AddInstruction.getPattern().matcher(unparsed).matches()){
+            parsed.setParsedElementOptional(
+                    Optional.of(
+                            new AddInstruction(lineNumber)
+                    )
+            );
         } else if (Arrays.stream(variables).anyMatch(var -> var.equals(unparsed))){
             parsed.setParsedElementOptional(
                     Optional.of(
                             new VariableInstruction(lineNumber,unparsed)
                     )
             );
-
         } else {
             parsed.setErrorMessage("Unknown instruction identifier: " + unparsed + " in line: " + lineNumber + "\n");
         }

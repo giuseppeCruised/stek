@@ -2,7 +2,7 @@ package reWritten.domain.items;
 
 import reWritten.utils.Log;
 
-public class IntegerItem implements DataItem,PrintableItem {
+public class IntegerItem implements DataItem,PrintableItem,NumberItem {
     private Integer value;
 
     public IntegerItem(Integer value) {
