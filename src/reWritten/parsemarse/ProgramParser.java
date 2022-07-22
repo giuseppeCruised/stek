@@ -72,7 +72,7 @@ public class ProgramParser {
         try {
             while ((line = br.readLine()) != null) {
                 if (readingMethod) {
-                    if (line.replaceAll(" +", " ").equals(" ")) {
+                    if (line.replaceAll(" +", "").equals("")) {
                         readingMethod = false;
                         ArrayList<String> unparsedMethodCopy = new ArrayList<>(unparsedMethodContent);
                         unparsedMethods.add(new UnparsedMethod(unparsedMethodCopy.toArray(String[]::new), methodName,
@@ -104,6 +104,10 @@ public class ProgramParser {
 
         } finally {
             br.close();
+            ArrayList<String> unparsedMethodCopy = new ArrayList<>(unparsedMethodContent);
+            unparsedMethods.add(new UnparsedMethod(unparsedMethodCopy.toArray(String[]::new), methodName,
+                    startLineNumber));
+            unparsedMethodContent.clear();
         }
 
         return new Pair<>(unparsedMethods, errorMessage);

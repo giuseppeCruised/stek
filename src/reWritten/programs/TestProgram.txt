@@ -1,0 +1,5 @@
+MAIN: =>
+  3 YEAH
+
+YEAH: a =>
+  a print a YEAH

@@ -19,9 +19,13 @@ public class MethodParser {
         String errorMessage = "";
 
         String[] variableNames = unparsed[0].split(":")[1].split("=>")[0].substring(1).split(" ");
-        Pair<Boolean,String> correctVariableNames = areVariableNamesCorrect(variableNames, errorMessage, startLine);
-        parsedSuccessfully = correctVariableNames.getFst();
-        errorMessage += correctVariableNames.getSnd();
+        if(variableNames.length==1 && variableNames[0].equals("")){
+            variableNames = new String[0];
+        } else {
+            Pair<Boolean,String> correctVariableNames = areVariableNamesCorrect(variableNames, errorMessage, startLine);
+            parsedSuccessfully = correctVariableNames.getFst();
+            errorMessage += correctVariableNames.getSnd();
+        }
 
         ArrayList<Instruction> instructions = new ArrayList<>();
         int lineNumber = startLine + 1;

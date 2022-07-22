@@ -2,7 +2,11 @@ package reWritten.domain.instructions;
 
 import reWritten.domain.DataStack;
 import reWritten.domain.InstructionStack;
+import reWritten.domain.items.DataItem;
+import reWritten.utils.Log;
 import reWritten.utils.Utils;
+
+import java.util.Arrays;
 
 public class MethodInstruction implements Instruction {
 
@@ -49,9 +53,43 @@ public class MethodInstruction implements Instruction {
 
     @Override
     public boolean executeInstruction(InstructionStack instructionStack, DataStack dataStack) {
+        VariableInstruction[] variableInstructions = Arrays.stream(instructions)
+                .filter(instruction -> instruction instanceof VariableInstruction)
+                .toArray(VariableInstruction[]::new);
+
+        fillMethodVariables(dataStack);
+
         for(Instruction instruction: Utils.reverseInstructions(this.instructions)){
             instructionStack.pushInstruction(instruction);
         }
         return true;
+    }
+
+    public void fillMethodVariables(DataStack dataStack){
+        for(String variable:variables){
+            if(dataStack.isEmpty()){
+                Log.log("Error: empty stack while assigning variable: "+variable+" of Method: "+name+" in Line: "+line);
+            } else {
+                DataItem item = dataStack.popItem();
+                Instruction correspondingInstruction = Utils.getInstructionFromItem(item,line);
+
+//                Arrays.stream(instructions).map(instruction -> {
+//                    if(instruction instanceof VariableInstruction){
+//                        if(((VariableInstruction) instruction).getName().equals(variable)){
+//                            return correspondingInstruction;
+//                        }
+//                    }
+//                    return instruction;
+//                });
+
+                for(Instruction instruction:instructions){
+                    if(instruction instanceof VariableInstruction){
+                        if(((VariableInstruction) instruction).getName().equals(variable)){
+                            ((VariableInstruction) instruction).setInstruction(correspondingInstruction);
+                        }
+                    }
+                }
+            }
+        }
     }
 }

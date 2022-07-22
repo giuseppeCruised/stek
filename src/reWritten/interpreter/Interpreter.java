@@ -15,14 +15,12 @@ public class Interpreter {
         if (hasMainMethod) {
             if (program.getErrorMessage().equals("")) {
                 runProgram(program.getMethods());
-
             } else {
                 Log.log(program.getErrorMessage());
             }
         } else {
             String errorMessage = program.getErrorMessage() + "No main method found \n";
             Log.log(errorMessage);
-
         }
     }
 
