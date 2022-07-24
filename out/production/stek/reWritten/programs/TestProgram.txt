@@ -1,2 +1,5 @@
 MAIN: =>
-  3 4 + dup print print
+   ?YEK
+
+YEK: =>
+  3 print

@@ -4,7 +4,7 @@ import reWritten.domain.DataStack;
 import reWritten.domain.InstructionStack;
 import reWritten.utils.Log;
 
-public class ErrorInstruction implements Instruction{
+public class ErrorInstruction implements Instruction {
     @Override
     public int getLine() {
         return 0;
