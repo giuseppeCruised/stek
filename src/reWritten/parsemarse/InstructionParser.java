@@ -62,6 +62,12 @@ public class InstructionParser {
                                 Optional.of(new MethodPointerInstruction(lineNumber, fittingMethod)));
                         return Optional.of(fittingMethod);
                     });
+        } else if (ExecutePointerInstruction.getPattern().matcher(unparsed).matches()) {
+            parsed.setParsedElementOptional(
+                    Optional.of(
+                            new ExecutePointerInstruction(lineNumber)
+                    )
+            );
 
         } else if (Arrays.stream(variables).anyMatch(var -> var.equals(unparsed))) {
             parsed.setParsedElementOptional(

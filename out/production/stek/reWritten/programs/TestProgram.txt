@@ -1,5 +1,5 @@
 MAIN: =>
-   ?YEK
+   ?YEK print ?YEK !
 
 YEK: =>
   3 print

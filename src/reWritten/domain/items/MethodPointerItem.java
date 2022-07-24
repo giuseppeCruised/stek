@@ -23,6 +23,6 @@ public class MethodPointerItem implements DataItem,PrintableItem{
 
     @Override
     public void printItem() {
-        Log.log("Pointer to Instruction: "+value.getName());
+        Log.log("Pointer to Method: "+value.getName());
     }
 }
