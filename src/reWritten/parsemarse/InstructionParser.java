@@ -42,6 +42,14 @@ public class InstructionParser {
                             new AddInstruction(lineNumber)
                     )
             );
+
+        } else if (DupInstruction.getPattern().matcher(unparsed).matches()){
+            parsed.setParsedElementOptional(
+                    Optional.of(
+                            new DupInstruction(lineNumber)
+                    )
+            );
+
         } else if (Arrays.stream(variables).anyMatch(var -> var.equals(unparsed))){
             parsed.setParsedElementOptional(
                     Optional.of(
