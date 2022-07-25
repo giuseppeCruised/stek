@@ -1,9 +1,10 @@
 MAIN: =>
-   ?FOUR true if
-   ?THREE false if
+  1 DOWN
 
-FOUR: =>
-  4 print
-
-THREE: =>
-  3 print
+DOWN: a =>
+  a 1 +
+  ?DOWN
+  a print
+  a 1 +
+  9 =
+  if
