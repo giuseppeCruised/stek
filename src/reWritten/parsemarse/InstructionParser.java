@@ -69,6 +69,13 @@ public class InstructionParser {
                     )
             );
 
+        } else if (IfInstruction.getPattern().matcher(unparsed).matches()) {
+            parsed.setParsedElementOptional(
+                    Optional.of(
+                            new IfInstruction(lineNumber)
+                    )
+            );
+
         } else if (Arrays.stream(variables).anyMatch(var -> var.equals(unparsed))) {
             parsed.setParsedElementOptional(
                     Optional.of(

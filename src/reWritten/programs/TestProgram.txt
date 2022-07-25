@@ -1,5 +1,9 @@
 MAIN: =>
-   ?YEK print ?YEK !
+   ?FOUR true if
+   ?THREE false if
 
-YEK: =>
+FOUR: =>
+  4 print
+
+THREE: =>
   3 print
