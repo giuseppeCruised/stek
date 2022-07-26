@@ -21,7 +21,7 @@ public class IntegerInstruction implements Instruction {
     }
 
     public static Pattern getPattern() {
-        return Pattern.compile("[1-9]+");
+        return Pattern.compile("[0-9]+");
     }
 
     @Override

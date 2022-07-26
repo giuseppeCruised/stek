@@ -30,13 +30,13 @@ public class IfInstruction implements Instruction {
         if (dataStack.isEmpty()) {
             return Log.log("Error: Empty Stack in If Instruction in Line: " + this.line);
         } else {
-            DataItem booleanItem = dataStack.popItem();
-            if (booleanItem instanceof BooleanItem) {
+            DataItem methodPointer = dataStack.popItem();
+            if (methodPointer instanceof MethodPointerItem) {
                 if (dataStack.isEmpty()) {
                     return Log.log("Error: Empty Stack in If Instruction in Line: " + this.line);
                 } else {
-                    DataItem methodPointer = dataStack.popItem();
-                    if (methodPointer instanceof MethodPointerItem) {
+                    DataItem booleanItem = dataStack.popItem();
+                    if (booleanItem instanceof BooleanItem) {
                         if ((Boolean) ((BooleanItem) booleanItem).getValue()) {
                             dataStack.pushItem(methodPointer);
                             instructionStack.pushInstruction(new ExecutePointerInstruction(this.line));
@@ -44,12 +44,12 @@ public class IfInstruction implements Instruction {
                         return true;
                     } else {
                         return Log.log("Type Error: If Instruction in Line: " + this.line +
-                                " could not get executed because second argument of If Instruction is not of Type MethodPointer");
+                                " could not get executed because first argument of If Instruction is not of Type Boolean");
                     }
                 }
             } else {
                 return Log.log("Type Error: If Instruction in Line: " + this.line +
-                        " could not get executed because first argument of If Instruction is not of Type Boolean");
+                        " could not get executed because second argument of If Instruction is not of Type MethodPointer");
             }
         }
     }

@@ -1,10 +1,9 @@
 MAIN: =>
-  1 DOWN
+  0 DOWN
 
 DOWN: a =>
-  a 1 +
-  ?DOWN
   a print
-  a 1 +
-  9 =
-  if
+  a 1 + dup
+  20 = not
+  ?DOWN if
+
