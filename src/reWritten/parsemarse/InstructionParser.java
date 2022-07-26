@@ -70,6 +70,10 @@ public class InstructionParser {
         } else if (Arrays.stream(variables).anyMatch(var -> var.equals(unparsed))) {
             parsed.setParsedElementOptional(Optional.of(new VariableInstruction(lineNumber, unparsed)));
 
+        } else if (StringInstruction.getPattern().matcher(unparsed).matches()) {
+            parsed.setParsedElementOptional(
+                    Optional.of(new StringInstruction(lineNumber, unparsed.substring(1, unparsed.length() - 1))));
+
         } else {
             parsed.setErrorMessage("Unknown instruction identifier: " + unparsed + " in line: " + lineNumber + "\n");
         }

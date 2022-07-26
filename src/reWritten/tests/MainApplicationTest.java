@@ -11,7 +11,7 @@ import java.io.IOException;
 public class MainApplicationTest {
     @Test
     public void mainTest() throws IOException {
-        File prog = new File("C:/Users/AnwenderIN/Desktop/Projects/stek/src/reWritten/programs/TestProgram.txt");
+        File prog = new File("C:/Users/AnwenderIN/Desktop/Projects/stek/src/reWritten/programs/TestProgram2.txt");
         Program parsedProgram = ProgramParser.parseProgram(prog);
         Interpreter.tryRunningProgram(parsedProgram);
     }

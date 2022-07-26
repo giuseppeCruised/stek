@@ -6,3 +6,4 @@ DOWN: a =>
   a 1 + dup
   20 = not
   ?DOWN if
+
