@@ -1,2 +1,2 @@
 MAIN: =>
-  "HS" not
+  "DU" " " "HS" + + print

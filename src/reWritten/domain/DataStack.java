@@ -1,6 +1,7 @@
 package reWritten.domain;
 
 import reWritten.domain.items.DataItem;
+import reWritten.utils.Log;
 
 import java.util.Stack;
 
@@ -13,6 +14,15 @@ public class DataStack {
 
     public DataItem popItem(){
         return this.dataStack.pop();
+    }
+
+    public DataItem safePop(int line,String name){
+        if(dataStack.isEmpty()){
+            Log.log("Error: Empty String in "+ name +" Instruction in Line: "+line);
+            return null;
+        } else {
+            return dataStack.pop();
+        }
     }
 
     public void pushItem(DataItem item){

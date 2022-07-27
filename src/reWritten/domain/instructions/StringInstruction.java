@@ -17,7 +17,7 @@ public class StringInstruction implements Instruction{
     }
 
     public static Pattern getPattern(){
-        return Pattern.compile("\"[a-z,A-Z,0-9]*\"");
+        return Pattern.compile("\"[a-z,A-Z,0-9, ]*\"");
 
     }
 

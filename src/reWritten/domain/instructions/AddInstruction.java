@@ -5,6 +5,7 @@ import reWritten.domain.InstructionStack;
 import reWritten.domain.items.DataItem;
 import reWritten.domain.items.IntegerItem;
 import reWritten.domain.items.NumberItem;
+import reWritten.domain.items.StringItem;
 import reWritten.utils.Log;
 
 import java.util.regex.Pattern;
@@ -12,7 +13,7 @@ import java.util.regex.Pattern;
 public class AddInstruction implements Instruction {
     private int line;
 
-    public AddInstruction(int line){
+    public AddInstruction(int line) {
         this.line = line;
 
     }
@@ -43,10 +44,14 @@ public class AddInstruction implements Instruction {
                                     (Integer) ((IntegerItem) item2).getValue()));
                         }
                     } else {
-                        return Log.log("Error: second Argument of '+' Instruction was not a Number in Line: " + line);
+                        return Log.log(
+                                "Error: second Argument of '+' Instruction could not be applied in Line: " + line);
                     }
+                } else if (item1 instanceof StringItem && item2 instanceof StringItem) {
+                    dataStack.pushItem(new StringItem((String) item2.getValue() + (String) item1.getValue()));
+
                 } else {
-                    return Log.log("Error: first Argument of '+' Instruction was not a Number in Line: " + line);
+                    return Log.log("Error: '+' Instruction could not be applied to Arguments in Line: " + line);
                 }
             }
         }
