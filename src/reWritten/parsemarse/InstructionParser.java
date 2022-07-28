@@ -40,6 +40,13 @@ public class InstructionParser {
                     )
             );
 
+        } else if (CharInstruction.getPattern().matcher(unparsed).matches()) {
+            parsed.setParsedElementOptional(
+                    Optional.of(
+                            new CharInstruction(lineNumber, unparsed.charAt(1))
+                    )
+            );
+
         } else if (Arrays.stream(methods).anyMatch(method -> method.getName().equals(unparsed.substring(1)))
                 && unparsed.charAt(0) == '?') {
             Arrays.stream(methods).filter(method -> method.getName().equals(unparsed.substring(1))).findFirst()

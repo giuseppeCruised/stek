@@ -1,2 +1,5 @@
 MAIN: =>
-  "DU" " " "HS" + + print
+  'a' print boom
+
+boom: =>
+  3 print
