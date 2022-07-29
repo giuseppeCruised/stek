@@ -28,6 +28,13 @@ public class InstructionParser {
                     )
             );
 
+        } else if (AndInstruction.getPattern().matcher(unparsed).matches()) {
+            parsed.setParsedElementOptional(
+                    Optional.of(
+                            new AndInstruction(lineNumber)
+                    )
+            );
+
         } else if (Arrays.stream(methods).anyMatch(method -> method.getName().equals(unparsed))) {
             MethodInstruction method =
                     Arrays.stream(methods).filter(m -> m.getName().equals(unparsed)).findFirst().orElse(null);

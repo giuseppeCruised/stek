@@ -1,5 +1,19 @@
 MAIN: =>
-  'a' print boom
+  3 duplicate print print
 
-boom: =>
-  3 print
+or: a b =>
+  b
+  a ?FirstBoolTrue if
+  a not ?FirstBoolFalse if
+
+FirstBoolFalse: b =>
+  b
+
+FirstBoolTrue: b =>
+  true
+
+duplicate: b =>
+  b b
+
+triple: b =>
+  b b b

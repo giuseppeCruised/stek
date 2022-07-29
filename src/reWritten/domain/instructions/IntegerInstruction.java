@@ -7,7 +7,7 @@ import reWritten.domain.items.IntegerItem;
 
 import java.util.regex.Pattern;
 
-public class IntegerInstruction implements Instruction {
+public class IntegerInstruction implements Instruction, CompilableInstruction{
     private final int value;
     private final int line;
 
@@ -33,5 +33,10 @@ public class IntegerInstruction implements Instruction {
     public boolean executeInstruction(InstructionStack instructionStack, DataStack dataStack) {
         dataStack.pushItem(new IntegerItem(this.value));
         return true;
+    }
+
+    @Override
+    public String compileInstruction() {
+        return "  push";
     }
 }
