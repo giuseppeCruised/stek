@@ -60,7 +60,7 @@ public class MethodParser {
         boolean flag = true;
 
         for (String variableName : variableNames) {
-            if (!Pattern.compile("[a-z,A-Z,0-9]").matcher(variableName).matches()) {
+            if (!Pattern.compile("[a-z,A-Z,0-9]+").matcher(variableName).matches()) {
                 currentErrorMessage =
                         currentErrorMessage + "Illegal character in variable name: " + variableName + " in Line: "+startLine+"\n";
                 flag = false;

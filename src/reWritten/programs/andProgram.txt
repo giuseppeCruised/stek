@@ -1,0 +1,13 @@
+MAIN: =>
+  true false and2 print
+
+and2: a b =>
+  b
+  a ?FirstBooleanTrue if
+  a not ?FirstBooleanFalse if
+
+FirstBooleanTrue: b =>
+  b
+
+FirstBooleanFalse: b =>
+  false

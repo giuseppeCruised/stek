@@ -1,5 +1,6 @@
 MAIN: =>
-  3 duplicate print print
+  false false or
+  print
 
 or: a b =>
   b
@@ -12,8 +13,4 @@ FirstBoolFalse: b =>
 FirstBoolTrue: b =>
   true
 
-duplicate: b =>
-  b b
-
-triple: b =>
-  b b b
+andand: a b =>
