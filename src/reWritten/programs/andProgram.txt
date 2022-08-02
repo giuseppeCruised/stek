@@ -1,5 +1,5 @@
 MAIN: =>
-  true false and2 print
+  true true and2 print
 
 and2: a b =>
   b
