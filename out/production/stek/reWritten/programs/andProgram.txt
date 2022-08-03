@@ -1,5 +1,5 @@
 MAIN: =>
-  true true and2 print
+  ThisReturnsATREU
 
 and2: a b =>
   b
@@ -11,3 +11,6 @@ FirstBooleanTrue: b =>
 
 FirstBooleanFalse: b =>
   false
+
+ThisReturnsATREU: =>
+  3 3 true print print print
